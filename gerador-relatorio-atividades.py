@@ -8,14 +8,14 @@ arquivosModificados = []
 dirpath = os.getcwd()
 foldername = os.path.basename(dirpath)
 
-commits = subprocess.check_output('git log  --author={} --after={} --pretty=format:%h --abbrev=10'.format(inputArgs[1:][0],inputArgs[1:][1])).decode().splitlines()
+commits = subprocess.check_output('git log  --author={} --after={} --pretty=format:%h --abbrev=10'.format(inputArgs[1:][0],inputArgs[1:][1]).split()).decode().splitlines()
 for commit in commits:
-    result = subprocess.check_output('git diff-tree --no-commit-id --diff-filter=A --name-only -r ' + commit ).decode().splitlines()
+    result = subprocess.check_output('git diff-tree --no-commit-id --diff-filter=A --name-only -r {}'.format( commit).split() ).decode().splitlines()
     if len(result) >0:
         arquivosNovos = arquivosNovos + list(map(lambda x: foldername + '/' + x + '#' + commit, result))
 
 for commit in commits:
-    result = subprocess.check_output('git diff-tree --no-commit-id --diff-filter=M --name-only -r ' + commit ).decode().splitlines()
+    result = subprocess.check_output('git diff-tree --no-commit-id --diff-filter=M --name-only -r {}'.format( commit).split() ).decode().splitlines()
     if len(result) >0:
         for modificado in set(list(map(lambda x: foldername + '/' + x + '#' + commit, result))):
             if list(map(lambda x: x.split('#')[0], arquivosModificados)).count(modificado.split('#')[0]) == 0:
