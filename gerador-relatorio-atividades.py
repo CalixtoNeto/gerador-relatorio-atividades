@@ -8,7 +8,7 @@ arquivosModificados = []
 dirpath = os.getcwd()
 foldername = os.path.basename(dirpath)
 
-commits = subprocess.check_output('git log  --author={} --after={} --pretty=format:%h --abbrev=10'.format(inputArgs[1:][0],inputArgs[1:][1]).split()).decode().splitlines()
+commits = subprocess.check_output('git log  --author={} --after={} --before={} --pretty=format:%h --abbrev=10'.format(inputArgs[1:][0],inputArgs[1:][1],inputArgs[1:][2]).split()).decode().splitlines()
 for commit in commits:
     result = subprocess.check_output('git diff-tree --no-commit-id --diff-filter=A --name-only -r {}'.format( commit).split() ).decode().splitlines()
     if len(result) >0:

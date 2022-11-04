@@ -6,14 +6,18 @@ O script recebe como parametros a chave do usuario e uma data, retornando um tex
 Dentro do repositorio:
 
 ```
-python3 /home/gerador-relatorio.py  <chave-usuario> <data>
+python3 /home/gerador-relatorio.py  <chave-usuario> <data-inicio> <data-fim>
 
- ```
- Exemplo:
 ```
-python3 /home/gerador-relatorio.py  c12345678 2022-09-01
+
+Exemplo:
+
 ```
-Retorno: 
+python3 /home/gerador-relatorio.py  c12345678 2022-09-01 2022-10-01
+```
+
+Retorno:
+
 ```
 _______________Arquivos Novos_______________
 ##Arquivos com extencao .java
